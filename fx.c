@@ -30,14 +30,25 @@ int main(int argc, char* argv[])
     }
   }
 
-  goto HELP;
+//  goto HELP;
 
   int narg = argc-optind;  
-  if (narg != 2) {
-    fprintf(stderr, "Two FASTQ filename arguments are required - you supplied %d.\n", narg);
+  if (narg != 1) {
+    fprintf(stderr, "A FASTQ filename arguments are required - you supplied %d.\n", narg);
     exit(1);
   }
-                
+  
+  fprintf(stderr, "Opening: %s\n", argv[optind]);
+  
+  SeqStream ss = SeqStream_open_single(argv[optind]);
+  SeqStream_dump(stderr, &ss);
+  Seq s;
+  
+  while ( Seq_read(&ss, &s) == 0 ) {
+    Seq_dump(stdout, &s);
+  }
+  
+
   
   return 0;
 }

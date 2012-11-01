@@ -3,12 +3,28 @@
 
 //---------------------------------------------------------
 
+const char* typeName[] = {
+  "ERROR",
+  "single",
+  "interleaved",
+  "paired",
+};
+
+const char* formatName[] = {
+  "ERROR", 
+  "fastq",
+  "fasta",
+  "raw",
+};
+
+//---------------------------------------------------------
+
 void SeqStream_dump(FILE* out, SeqStream* ss) 
 {
   assert(out != NULL);
   assert(ss != NULL);
-  fprintf(out, "TYPE\t%d\n",   ss->type);
-  fprintf(out, "FORMAT\t%d\n", ss->format);
+  fprintf(out, "TYPE\t%d (%s)\n", ss->type, typeName[ss->type]);
+  fprintf(out, "FORMAT\t%d (%s)\n", ss->format, formatName[ss->format]);
   fprintf(out, "FILE1\t%p\n",  (void*) ss->file[0]);
   fprintf(out, "FILE2\t%p\n",  (void*) ss->file[1]);
 }
@@ -23,6 +39,9 @@ SeqStream SeqStream_open(char* f1, char* f2, int type)
   SeqStream ss;
   
   ss.type = type;
+  ss.format = 0;
+  ss.file[0] = NULL;
+  ss.file[1] = NULL;
   
   ss.file[0] = fopen(f1, "rw");
   assert(ss.file[0] != NULL);

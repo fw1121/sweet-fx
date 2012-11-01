@@ -8,13 +8,13 @@
 #include <string.h>
 #include <limits.h>
 
-#define FX_FORMAT_FASTQ		4
+#define FX_FORMAT_FASTQ		1
 #define FX_FORMAT_FASTA		2
-#define FX_FORMAT_RAW		1
+#define FX_FORMAT_RAW		3
 
 #define FX_TYPE_SINGLE		1
 #define FX_TYPE_INTERLEAVED	2
-#define FX_TYPE_PAIRED		4
+#define FX_TYPE_PAIRED		3
 
 typedef struct SeqStream {
   FILE* file[2];
