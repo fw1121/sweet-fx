@@ -8,5 +8,6 @@ typedef struct Tool {
 }
 Tool;
 
+extern Tool tool[];
 
 #endif
