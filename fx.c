@@ -4,21 +4,29 @@
 
 //---------------------------------------------------------
 
+void usage(void) {
+  fprintf(stderr,"SYNOPSIS\n  SweetFX: Fast NGS read file tools <torsten.seemann@monash.edu>\n");
+  fprintf(stderr,"USAGE\n  fx <tool> [options] <inputs>\n");
+  fprintf(stderr,"TOOLS\n  FIXME\n");
+  fprintf(stderr,"OPTIONS\n");
+  fprintf(stderr,"  -q    FASTQ quality encoding offset (33=Sanger, 59=Solexa, 64=Illumina)\n");
+}
+
+
+//---------------------------------------------------------
+
 int main(int argc, char* argv[]) 
 {
 //  SeqStream in;
 //  Seq read;
   int qzero=33;
-  
+
   while (1) {
-    int c = getopt(argc, argv, "ho:");
+    int c = getopt(argc, argv, "hq:");
     if (c == -1) break;
     switch (c) {
       case 'h':
-        HELP:
-        fprintf(stderr,"Usage: %s [options] file.fastq [file2.fq ...]\n", argv[0]);
-	fprintf(stderr,"\t-h\tshow this help\n");       
-	fprintf(stderr,"\t-q Q0\tfastq offset: sanger=33 solexa=59 illumina=64 (default=33)\n");
+        usage();
         exit(0);
       case 'q':
         qzero = atoi(optarg);
@@ -30,11 +38,10 @@ int main(int argc, char* argv[])
     }
   }
 
-//  goto HELP;
 
   int narg = argc-optind;  
   if (narg != 1) {
-    fprintf(stderr, "A FASTQ filename arguments are required - you supplied %d.\n", narg);
+    fprintf(stderr, "Please specify a tool, eg. fx count\n", narg);
     exit(1);
   }
   
