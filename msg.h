@@ -1,8 +1,8 @@
 #ifndef MSG_H
 #define MSG_H
 
-void error(char* fmt, ...);
-void warning(char* fmt, ...);
-void message(char* fmt, ...);
+void msg(char* fmt, ...);
+void _warning(char* fmt, ...);
+void _error(char* fmt, ...);
 
 #endif

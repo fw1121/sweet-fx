@@ -9,8 +9,8 @@ TOP ?= $(shell pwd)
 
 # compiler settings
 CC=gcc
-CFLAGS=-Wall -O3 -m64 -mtune=core2 -msse4 -std=c99 -pedantic -ggdb
-LIB=-lm
+OPTIMIZE=-O3
+CFLAGS=-Wall -std=c99 -pedantic -ggdb $(OPTIMIZE) $(shell pkg-config --cflags glib-2.0)
 
 # tool name
 BIN=fx
@@ -20,13 +20,7 @@ OBJ=$(SRC:.c=.o)
 all: $(BIN)
 
 $(BIN): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIB)
+	$(CC) $(CFLAGS) $^ -o $@ -lm $(shell pkg-config --libs glib-2.0)
 
-#install: $(BIN)
-#	install --target-directory=$(INSTALLDIR) $(BINS)
-
-#uninstall:
-#	$(RM) -f 
-	
 clean:
 	$(RM) -f $(BIN) $(wildcard *.o) $(wildcard *~)

@@ -9,32 +9,33 @@ static time_t epoch = 0;
 
 //--------------------------------------------------------------------------
 
-void message(char* fmt, ...)
+void msg(char* fmt, ...)
 {
   va_list args;
+  va_start(args, fmt);
   if (!epoch) epoch = time(NULL);
   time_t tick = time(NULL) - epoch;
   fprintf(stderr, "[%ld] ", tick);
-  fprintf(stderr, fmt, args);
+  vfprintf(stderr, fmt, args);
+  va_end(args);
   fprintf(stderr, "\n");
 }
 
 
 //--------------------------------------------------------------------------
 
-void warning(char* fmt, ...)
+void _warning(char* fmt, ...)
 {
   va_list args;
-  message(fmt, args);
+  msg(fmt, args);
 }
-
 
 //--------------------------------------------------------------------------
 
-void error(char* fmt, ...)
+void _error(char* fmt, ...)
 {
   va_list args;
-  message(fmt, args);
+  msg(fmt, args);
   exit(-1);
 }
 
