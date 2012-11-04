@@ -1,5 +1,6 @@
 # Target dir
 bin/
+old/
 
 # Object files
 *.o
