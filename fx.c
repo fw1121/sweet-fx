@@ -5,7 +5,7 @@
 //---------------------------------------------------------
 
 void usage(void) {
-  fprintf(stderr,"SYNOPSIS\n  SweetFX: Fast NGS read file tools <torsten.seemann@monash.edu>\n");
+  fprintf(stderr,"SYNOPSIS\n  SweetFX: Fast NGS read file tools\n");
   fprintf(stderr,"USAGE\n  fx <tool> [options]\n");
   fprintf(stderr,"TOOLS\n");
   for (int i=0; i < ntool; i++) {
